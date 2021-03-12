@@ -21,7 +21,7 @@
 <body>
 	<form method="post" action="Controller/Return.php">
 		<fieldset>
-			<legend><b>ISSUE BOOKS</b></legend>
+			<legend><b>RETURN BOOKS</b></legend>
 			<label>Book ID:</label>
       		<input type="text" name="bid" required><br>
       		<label>User Name:</label>
