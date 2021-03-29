@@ -1,31 +1,25 @@
 <?php 
+require_once 'model.php';
 	function DataSave($data)
-	{ 
-		if(file_exists('Controller/data.json'))  
-	    {  
-	      $current_data = file_get_contents('Controller/data.json');
-	      $array_data = json_decode($current_data, true);  
-	      $extra = array(  
-	        'name'            =>     $data['name'],  
-	        'email'          =>     $data["email"],  
-	        'uname'     =>     $data["uname"],
-	        'password'     =>     $data["password"],
-	        'gender'     =>     $data["gender"],
-	        'dd'     =>     $data["dd"],
-	        'mm'     =>     $data["mm"],
-	        'yyyy'     =>     $data["yyyy"],
-	        );
-	        $array_data[] = $extra;  
-	        $final_data = json_encode($array_data); 
-	        file_put_contents('Controller/data.json', $final_data); 
-	         return true;
-	    }  
-	    else  
-	    {  
-	      $error = 'JSON File not exits'; 
-	      return false; 
-	    }
+	{
+		$login['uid'] = $data['uid'];
+		$login['password'] = $data['password'];
+		$login['type'] = "l";
+		$login['status'] = "i";
 
+		AddIntoLogin($login);
+
+		$librarian['uid'] = $data['uid'];
+		$librarian['name'] = $data['name'];
+		$librarian['email'] = $data['email'];
+		$librarian['dob'] = $data['yyyy']."-".$data['mm']."-".$data['dd'];
+		$librarian['address'] = $data['address'];
+		$librarian['gender'] = $data['gender'];
+		$librarian['picture'] = $data['picture'];
+
+		AddIntoLibrarian($librarian);
+
+		return true;
 
 	}
 	

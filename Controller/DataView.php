@@ -1,9 +1,7 @@
 <?php
-	function ViewData()
+	require_once 'model.php';
+	function ViewData($id)
 		{
-			$data = file_get_contents("Controller/data.json");
-            $data = json_decode($data, true);
-            foreach($data as $row){}
-            	return $row;
+			return View($id);
 		}
 ?>

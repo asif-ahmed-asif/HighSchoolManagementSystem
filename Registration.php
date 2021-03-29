@@ -3,8 +3,8 @@
  $check = 1;  
 
 
- $nameErr = $emailErr = $dobErr = $genderErr = $unameErr = $passErr = $cpassErr = "";
- $name = $email = $uname = $dd = $mm = $yyyy = $gender = $password = $cpassword = "";
+ $nameErr = $emailErr = $dobErr = $genderErr = $passErr = $cpassErr = $imageErr = "";
+ $name = $email = $dd = $mm = $yyyy = $gender = $password = $cpassword = "";
 
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["name"])) {
@@ -69,18 +69,6 @@
     $gender = $_POST["gender"];
   }
 
-  if (empty($_POST["uname"])) {
-      $unameErr = "User Name is required";
-      $check = 0;
-    } else {
-      $uname = $_POST["uname"];
-      $count = strlen("$uname");
-      if ((!preg_match("/^[a-zA-Z-_' ]*$/",$uname)) || $count < 2 ){
-        $unameErr = "Only alpha numeric characters, period, dash, underscore allowed and contains at least two characters";
-        $check = 0;
-      }
-    }
-
     if (empty($_POST["password"])) {
       $passErr = "Password is required";
       $check = 0;
@@ -104,21 +92,26 @@
         $check = 0;
       }
     }
-
  }
 
  
  if(isset($_POST["submit"]))  
   {
     if ($check == 1) { 
+        $data['uid'] = $_POST['uid'];
         $data['name'] = $_POST['name'];  
         $data['email'] = $_POST["email"];  
-        $data['uname'] = $_POST["uname"];
         $data['password'] = $_POST["password"];
+        $data['address'] = $_POST["address"];
         $data['gender'] = $_POST["gender"];
         $data['dd'] = $_POST["dd"];
         $data['mm'] = $_POST["mm"];
         $data['yyyy'] = $_POST["yyyy"];
+        $data['picture'] = basename($_FILES["picture"]["name"]);
+
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["picture"]["name"]);
+        move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file);
         
         include 'Controller/DataSave.php';
         if(DataSave($data)) {
@@ -129,7 +122,8 @@
 
       }
     } 
-
+include 'Controller/GetUid.php';
+$id =  GetUserId();
 ?> 
 
  <!DOCTYPE html>
@@ -141,24 +135,25 @@
  </head>
  <body>
   <?php include('Header.php');?>
-  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  <form method="post"  enctype="multipart/form-data">
     <fieldset>
       <legend><b>REGISTRATION</b></legend>
+      <label>User ID: </label>
+      <input type="text" name="uid" value="<?php echo $id;?>" readonly><hr>
       <label>Name: </label>
       <input type="text" name="name">
       <span class="error"><?php echo $nameErr;?></span><hr>
       <label>Email: </label>
       <input type="text" name="email">
       <span class="error"><?php echo $emailErr;?></span><hr>
-      <label>User Name: </label>
-      <input type="text" name="uname">
-      <span class="error"><?php echo $unameErr;?></span><hr>
       <label>Password: </label>
       <input type="password" name="password">
       <span class="error"><?php echo $passErr;?></span><hr>
       <label>Confirm Password: </label>
       <input type="password" name="cpassword">
       <span class="error"><?php echo $cpassErr;?></span><hr>
+      <label>Address: </label>
+      <input type="text" name="address" size="80" required><hr>
       <fieldset>
         <legend>Gender</legend>
         <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="Female">Female
@@ -173,6 +168,10 @@
         <input type="text" name="yyyy" size="8">
         (dd /mm/ yyyy)
         <span class="error"><?php echo $dobErr;?></span>
+      </fieldset><hr>
+      <fieldset>
+        <legend>Profile Picture</legend>
+        <input type="file" name="picture" required>
       </fieldset><hr><br><br>
       <input type="submit" name="submit" value="Submit">
       <input type="reset" name="reset" value="Reset">

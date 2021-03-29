@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if (isset($_SESSION['uname'])) 
+	if (isset($_SESSION['userid'])) 
 	{
 
 		include "LoginHeader.php";
@@ -20,21 +20,37 @@
 <body>
 <fieldset>
     <legend><b>EDIT PROFILE</b></legend>
-	<form method="" action="">
+	<form method="post" action="Controller/UpdateData.php" enctype="multipart/form-data">
 		<br/>
 		<table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
+				<td>User ID</td>
+				<td>:</td>
+				<td><input name="uid" type="text" value="<?php echo $rows["uid"];?>" required readonly></td>
+				<td></td>
+			</tr>
+			<tr><td colspan="4"><hr/></td></tr>
+			<tr>
 				<td>Name</td>
 				<td>:</td>
-				<td><input name="name" type="text" value="<?php echo $row["name"];?>" required></td>
-				<td></td>
-			</tr>		
+				<td>
+					<input name="name" type="text" value="<?php echo $rows["name"];?>" required>
+				</td>
+				<td></td>		
 			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td>Email</td>
 				<td>:</td>
 				<td>
-					<input name="email" type="text" value="<?php echo $row["email"];?>" required>
+					<input name="email" type="text" value="<?php echo $rows["email"];?>" required>
+				</td>
+				<td></td>		
+			<tr><td colspan="4"><hr/></td></tr>
+			<tr>
+				<td>Address</td>
+				<td>:</td>
+				<td>
+					<input name="address" type="text" size="80" value="<?php echo $rows["address"];?>" required>
 				</td>
 				<td></td>		
 			<tr><td colspan="4"><hr/></td></tr>
@@ -42,9 +58,9 @@
 				<td>Gender</td>
 				<td>:</td>
 				<td>   
-					<input name="gender" type="radio" checked="checked">Male
-					<input name="gender" type="radio" >Female
-					<input name="gender" type="radio" >Other
+					<input name="gender" type="radio" <?php if ($rows["gender"] == "Male"){ echo "checked";}?> value="Male">Male
+					<input name="gender" type="radio" <?php if ($rows["gender"] == "Female"){ echo "checked";}?> value="Female">Female
+					<input name="gender" type="radio" <?php if ($rows["gender"] == "Other"){ echo "checked";}?> value="Other">Other
 				</td>
 				<td></td>
 			</tr>		
@@ -53,15 +69,14 @@
 				<td valign="top">Date of Birth</td>
 				<td valign="top">:</td>
 				<td>
-					<input name="dob" type="text" value="<?php echo $row["dd"]."-".$row["mm"]."-".$row["yyyy"];?>">
+					<input name="dob" type="Date" value="<?php echo $rows["dob"];?>">
 					<br/>
-					<font size="2"><i>(dd/mm/yyyy)</i></font>
 				</td>
 				<td></td>
 			</tr>
 		</table>
 		<hr/>
-		<input type="submit" value="Submit">		
+		<input type="submit" name="update" value="Update">		
 	</form>
 </fieldset>
 

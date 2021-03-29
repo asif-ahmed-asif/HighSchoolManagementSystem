@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if (isset($_SESSION['uname'])) 
+	if (isset($_SESSION['userid'])) 
 	{
 
 		include "LoginHeader.php";
@@ -29,12 +29,10 @@
 
 				<td>Name</td>
 				<td>:</td>
-				<td><?php echo $row["name"];?></td>
+				<td><?php echo $rows["name"];?></td>
 
 				<td rowspan="10" align="center">
-					<img width="157" height="173" src="image/icon2.png"/><br/>
-					<input type="submit" name="submit" value="Change" style="width: 60px">
-					<input name="image" type="file">
+					<img width="157" height="173" src="uploads/<?php echo $rows["picture"] ?>" alt="<?php echo $rows["name"] ?>"/><br/>
                     <br/>
 				</td>
 			</tr>
@@ -43,21 +41,27 @@
 			<tr>
 				<td>Email</td>
 				<td>:</td>
-				<td><?php echo $row["email"];?></td>
+				<td><?php echo $rows["email"];?></td>
 			</tr>
 
 			<tr><td colspan="3"><hr/></td></tr>
 			<tr>
 				<td>Gender</td>
 				<td>:</td>
-				<td><?php echo $row["gender"];?></td>
+				<td><?php echo $rows["gender"];?></td>
 			</tr>
 
 			<tr><td colspan="3"><hr/></td></tr>
 			<tr>
 				<td>Date of Birth</td>
 				<td>:</td>
-				<td><?php echo $row["dd"]."-".$row["mm"]."-".$row["yyyy"];?></td>
+				<td><?php echo $rows["dob"];?></td>
+			</tr>
+			<tr><td colspan="3"><hr/></td></tr>
+			<tr>
+				<td>Address</td>
+				<td>:</td>
+				<td><?php echo $rows["address"];?></td>
 			</tr>
 		</table>	
         <hr/>

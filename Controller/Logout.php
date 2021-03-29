@@ -1,15 +1,10 @@
 <?php 
 
 session_start();
-
-if (isset($_SESSION['uname']))
-{
-  session_destroy();
-  echo "<script>location.href='../Login.php'</script>";
+session_destroy();
+if (isset($_COOKIE["userid"]) AND isset($_COOKIE["password"])){
+		setcookie("userid", '', time() - (3600));
+		setcookie("password", '', time() - (3600));
 }
-
-else
-{
-  echo "<script>location.href='../Login.php'</script>";
-}
+echo "<script>location.href='../Login.php'</script>";
 ?>

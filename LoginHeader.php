@@ -1,7 +1,8 @@
 <?php
-	include 'Controller/DataView.php';
-    $row = ViewData();
+    include 'Controller/DataView.php';
+    $rows = ViewData($_SESSION['userid']);
   ?>
+
 <table width="80%" align="center" cellspacing="0" cellpadding="10" border="1">
     <tr>
         <td colspan="2" valign="middle" height="70">  
@@ -12,7 +13,7 @@
                     </td>
                     <td align="right">
 
-                    Logged in as <a href="<?php if(isset($_SESSION['uname'])) {echo "Dashboard.php";} else { echo "Login.php";} ?>" ><?php echo $row["name"];?></a>&nbsp;|
+                    Logged in as <a href="Dashboard.php"><?php echo $rows['name'] ?></a>&nbsp;|
                         <a href="Controller/Logout.php">Logout</a>
                     </td>
                 </tr>

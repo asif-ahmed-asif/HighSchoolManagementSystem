@@ -9,30 +9,37 @@
 </html>
 <?php
 session_start();
+if (isset($_POST['submit'])) {
+	
 
-$uname="admin";
-$password="admin@123";
-
-if (isset($_SESSION['uname'])) 
-{
-	include "LoginHeader.php";
-	include "Sidebar.php"; 
-	echo "<h1> Welcome ".$row['name']."</h2>";
+	$userid = $_POST['uid'];
+	$pass = $_POST['password'];
+	include 'Controller/LoginValidate.php';
+	$row = LoginValidation($userid, $pass);
 }
-else
-{
-	include 'Controller/DataView.php';
-    $row = ViewData();
-	if ($_POST['uname']==$uname && $_POST['password']==$password)
-	{
-		$_SESSION['uname'] = $uname;
-		echo "<script>location.href='Dashboard.php'</script>";
 
+
+	if (isset($_SESSION['userid'])) 
+	{
+		include "LoginHeader.php";
+		include "Sidebar.php"; 
+		echo "<h1> Welcome ".$rows['name']."</h2>";
 	}
 	else
 	{
-		echo "<script>alert(Username or Password incorrect!)</script>";
-		echo "<script>location.href='Login.php'</script>";
+		if (($row == null) || ($row['status'] == "i")) {
+			echo "<script>alert(Username or Password incorrect! or account is not activated)</script>";
+			header('location:Login.php');
+		}else{
+			$_SESSION['userid'] = $row['uid'];
+			if (isset($_POST['remember'])){
+					setcookie("userid", $row['uid'], time() + (86400 * 30)); 
+					setcookie("password", $row['password'], time() + (86400 * 30)); 
+			}
+	 
+			
+			header('location:Dashboard.php');
+
+		}
 	}
-}
 ?>
