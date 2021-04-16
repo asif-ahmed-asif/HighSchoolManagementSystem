@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Dashboard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 
@@ -27,7 +29,7 @@ if (isset($_POST['submit'])) {
 	}
 	else
 	{
-		if (($row == null) || ($row['status'] == "i")) {
+		if (($row == null) || ($row['status'] != "a")) {
 			echo "<script>alert(Username or Password incorrect! or account is not activated)</script>";
 			header('location:Login.php');
 		}else{

@@ -16,6 +16,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Profile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 
@@ -31,8 +34,8 @@
 				<td>:</td>
 				<td><?php echo $rows["name"];?></td>
 
-				<td rowspan="10" align="center">
-					<img width="157" height="173" src="uploads/<?php echo $rows["picture"] ?>" alt="<?php echo $rows["name"] ?>"/><br/>
+				<td rowspan="10" align="right">
+					<img width="250" height="300" src="uploads/<?php echo $rows["picture"] ?>" alt="<?php echo $rows["name"] ?>"/><br/>
                     <br/>
 				</td>
 			</tr>

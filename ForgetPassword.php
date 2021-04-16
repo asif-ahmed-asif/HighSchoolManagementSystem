@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Forgot Password</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   
 </head>
 <style >
@@ -36,7 +38,7 @@
 ?>
 <?php include('Header.php');?>
 <form method="post" action="">
-<fieldset>
+<fieldset style="margin-left: 35px">
     <legend><b>FORGOT PASSWORD</b></legend>
       <label>Email: </label>
       <input type="text" name="email">

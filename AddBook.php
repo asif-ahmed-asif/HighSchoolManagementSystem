@@ -1,7 +1,7 @@
 <?php  
 
   session_start();
-  if (isset($_SESSION['uname'])) 
+  if (isset($_SESSION['userid'])) 
   {
 
     include "LoginHeader.php";
@@ -25,11 +25,6 @@
     $check = 0;
   }
 
-  if (empty($_POST["bid"])) {
-    $bidErr = "Book id is required";
-    $check = 0;
-  }
-
   if (empty($_POST["author"])) {
     $authorErr = "Author name is required";
     $check = 0;
@@ -46,11 +41,11 @@
  if(isset($_POST["submit"]))  
   {
     if ($check == 1) { 
-        $data['bname'] = $_POST['bname'];  
-        $data['bid'] = $_POST["bid"];  
+        $data['bid'] = $_POST["bid"];
+        $data['bname'] = $_POST['bname'];    
         $data['author'] = $_POST["author"];
         $data['category'] = $_POST["category"];
-        
+        $data['status'] = "a";
         include 'Controller/BookSave.php';
         if(BookSave($data)) {
           $message = "Book has been saved.";
@@ -59,7 +54,10 @@
         }
 
       }
-    } 
+    }
+
+include 'Controller/GetBid.php';
+$id =  GetBookId(); 
 
 ?> 
 
@@ -70,17 +68,18 @@
  <style>
 .error {color: #FF0000;}
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  </head>
  <body>
-  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  <form method="post" enctype="multipart/form-data">
     <fieldset>
       <legend><b>Add Book</b></legend>
+      <label>Book Id: </label>
+      <input type="text" name="bid" value="<?php echo $id;?>" readonly><hr>
       <label>Book Name: </label>
       <input type="text" name="bname">
       <span class="error"><?php echo $bnameErr;?></span><hr>
-      <label>Book Id: </label>
-      <input type="text" name="bid">
-      <span class="error"><?php echo $bidErr;?></span><hr>
       <label>Author Name: </label>
       <input type="text" name="author">
       <span class="error"><?php echo $authorErr;?></span><hr>

@@ -132,11 +132,14 @@ $id =  GetUserId();
  <style>
 .error {color: #FF0000;}
 </style>
+  <title>Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  </head>
  <body>
   <?php include('Header.php');?>
   <form method="post"  enctype="multipart/form-data">
-    <fieldset>
+    <fieldset style="margin-left: 35px">
       <legend><b>REGISTRATION</b></legend>
       <label>User ID: </label>
       <input type="text" name="uid" value="<?php echo $id;?>" readonly><hr>

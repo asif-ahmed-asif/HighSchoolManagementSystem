@@ -1,9 +1,10 @@
 <?php 
 	require_once 'model.php';
-	function BookIssue($data)
+	function BookUpdate($data)
 	{
-		IssueBook($data);
+		UpdateBook($data);
 
 		return true;
 	}
+
  ?>

@@ -16,6 +16,9 @@
                 <li><a href="FindBook.php">Find Books</a></li>
                 <li><a href="IssueBook.php">Issue Books</a></li>
                 <li><a href="ReturnBook.php">Return Books</a></li>
+                <li><a href="Balance.php">Balance Recharge</a></li>
+                <li><a href="LibraryCardAdd.php">Issue Library Card</a></li>
+                <li><a href="LibraryCardView.php">View Library Cards</a></li>
             </ul>
             <b>&nbsp;Personal</b><hr/>
             <ul>

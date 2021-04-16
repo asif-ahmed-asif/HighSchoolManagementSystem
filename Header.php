@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+		a:link 
+	    {
+	        text-decoration: none;
+	    }
+        a:hover {
+          color: Red;
+        }
+    </style>
 </head>
 <body>
 

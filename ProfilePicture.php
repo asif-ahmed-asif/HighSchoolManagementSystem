@@ -31,6 +31,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Profile Picture</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <fieldset>
@@ -40,7 +43,7 @@
         <table>
 
             <tr>
-                <td><img src="uploads/<?php echo $rows["picture"] ?>" alt="<?php echo $rows["name"] ?>" width="157" height="173"><br></td>
+                <td><img src="uploads/<?php echo $rows["picture"] ?>" alt="<?php echo $rows["name"] ?>" width="250" height="300"><br></td>
             </tr>
 
             <tr>
@@ -49,7 +52,7 @@
 
         </table>
         <hr/>
-        <input type="submit" name="submit" value="Change" style="width: 60px">
+        <input type="submit" name="submit" value="Change" style="width: 100px">
         
     </form>
 </fieldset>

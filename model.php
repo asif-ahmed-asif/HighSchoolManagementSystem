@@ -15,11 +15,50 @@ function UserId()
     $row = mysqli_fetch_array($result);
     $lastid = $row['uid'];
     if ($lastid == null) {
-        return "USER1";
+        return "1000";
     }else{
-        $temp = substr($lastid, 4);
-        $temp1 = intval($temp);
-        return "USER".($temp1 + 1);
+        
+        return $lastid + 1;
+    }
+}
+
+function BookId()
+{
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "school";
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+    $query = "SELECT bid FROM `book` ORDER BY bid DESC LIMIT 1";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_array($result);
+    $lastbid = $row['bid'];
+    if ($lastbid == null) {
+        return "100";
+    }else{
+        
+        return $lastbid + 1;
+    }
+}
+
+function IssueID()
+{
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "school";
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+    $query = "SELECT id FROM `issuebook` ORDER BY id DESC LIMIT 1";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_array($result);
+    $lastbid = $row['id'];
+    if ($lastbid == null) {
+        return "1";
+    }else{
+        
+        return $lastbid + 1;
     }
 }
 
@@ -58,6 +97,58 @@ VALUES (:uid, :name, :email, :dob, :address, :gender, :picture)";
             ':address' => $librarian['address'],
             ':gender' => $librarian['gender'],
             ':picture' => $librarian['picture']
+        ]);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    
+    $conn = null;
+}
+
+function AddBook($data)
+{
+    $conn = db_conn();
+    $selectQuery = "INSERT into book (bid, bname, author, category, status)
+VALUES (:bid, :bname, :author, :category, :status)";
+    try{
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            ':bid' => $data['bid'],
+            ':bname' => $data['bname'],
+            ':author' => $data['author'],
+            ':category' => $data['category'],
+            ':status' => $data['status']
+        ]);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    
+    $conn = null;
+}
+
+function IssueBook($data)
+{
+    $conn = db_conn();
+    $selectQuery = "INSERT into issuebook (id, bid, uid, issuedate, duedate)
+VALUES (:id, :bid, :uid, :idate, :ddate)";
+    try{
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            ':id' => $data['id'],
+            ':bid' => $data['bid'],
+            ':uid' => $data['uid'],
+            ':idate' => $data['idate'],
+            ':ddate' => $data['ddate'],
+        ]);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    
+    $selectQuery = "UPDATE book SET status = ? WHERE bid = ?";
+    try{
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            $data['status'], $data['bid']
         ]);
     }catch(PDOException $e){
         echo $e->getMessage();
@@ -155,9 +246,9 @@ function ViewLogin($id)
     return $row;
 }
 
-function showAllStudents(){
+function ShowAllBooks(){
 	$conn = db_conn();
-    $selectQuery = 'SELECT * FROM `user_info` ';
+    $selectQuery = 'SELECT * FROM `book`';
     try{
         $stmt = $conn->query($selectQuery);
     }catch(PDOException $e){
@@ -167,9 +258,9 @@ function showAllStudents(){
     return $rows;
 }
 
-function showStudent($id){
+function ShowBook($id){
 	$conn = db_conn();
-	$selectQuery = "SELECT * FROM `user_info` where ID = ?";
+	$selectQuery = "SELECT * FROM `book` where bid = ?";
 
     try {
         $stmt = $conn->prepare($selectQuery);
@@ -182,9 +273,9 @@ function showStudent($id){
     return $row;
 }
 
-function searchUser($user_name){
+function SearchBook($bname){
     $conn = db_conn();
-    $selectQuery = "SELECT * FROM `user_info` WHERE Username LIKE '%$user_name%'";
+    $selectQuery = "SELECT * FROM `book` WHERE bname LIKE '%$bname%'";
 
     
     try{
@@ -197,35 +288,13 @@ function searchUser($user_name){
 }
 
 
-function addStudent($data){
-	$conn = db_conn();
-    $selectQuery = "INSERT into user_info (Name, Surname, Username, Password, image)
-VALUES (:name, :surname, :username, :password, :image)";
-    try{
-        $stmt = $conn->prepare($selectQuery);
-        $stmt->execute([
-        	':name' => $data['name'],
-        	':surname' => $data['surname'],
-        	':username' => $data['username'],
-        	':password' => $data['password'],
-        	':image' => $data['image']
-        ]);
-    }catch(PDOException $e){
-        echo $e->getMessage();
-    }
-    
-    $conn = null;
-    return true;
-}
-
-
-function updateStudent($id, $data){
+function UpdateBook($data){
     $conn = db_conn();
-    $selectQuery = "UPDATE user_info set Name = ?, Surname = ?, Username = ? where ID = ?";
+    $selectQuery = "UPDATE book SET bname = ?, author = ?, category = ? WHERE bid = ?";
     try{
         $stmt = $conn->prepare($selectQuery);
         $stmt->execute([
-        	$data['name'], $data['surname'], $data['username'], $id
+        	$data['bname'], $data['author'], $data['category'], $data['bid']
         ]);
     }catch(PDOException $e){
         echo $e->getMessage();
@@ -235,9 +304,9 @@ function updateStudent($id, $data){
     return true;
 }
 
-function deleteStudent($id){
+function DeleteBooks($id){
 	$conn = db_conn();
-    $selectQuery = "DELETE FROM `user_info` WHERE `ID` = ?";
+    $selectQuery = "DELETE FROM `book` WHERE bid = ?";
     try{
         $stmt = $conn->prepare($selectQuery);
         $stmt->execute([$id]);
@@ -247,4 +316,83 @@ function deleteStudent($id){
     $conn = null;
 
     return true;
+}
+
+function GetBalance($uid){
+    $conn = db_conn();
+    $selectQuery = "SELECT * FROM `student` where uid = ?";
+
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([$uid]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
+}
+
+function IssueDetails($id){
+      $conn = db_conn();
+    $selectQuery = "SELECT * FROM `issuebook` where id = ?";
+
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([$id]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
+}
+
+function ReturnBook($uid, $bid, $status, $id, $ret, $fine, $balance)
+{
+    $conn = db_conn();
+    
+    $selectQuery = "UPDATE `book` SET status = ? WHERE bid = ?";
+    try{
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([$status, $bid]);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    $selectQuery = "UPDATE `issuebook` SET returndate = ?, fine = ? WHERE id = ?";
+    try{
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([$ret, $fine, $id]);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    $selectQuery = "UPDATE `student` SET balance = ? WHERE uid = ?";
+    try{
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([$balance, $uid]);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    
+    $conn = null;
+}
+
+function Balance($uid, $balance)
+{
+    $conn = db_conn();
+    
+    
+    $selectQuery = "UPDATE `student` SET balance = ? WHERE uid = ?";
+    try{
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([$balance, $uid]);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    
+    $conn = null;
 }
