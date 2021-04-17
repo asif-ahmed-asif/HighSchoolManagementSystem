@@ -26,7 +26,7 @@
                 <li><a href="EditProfile.php" >Edit Profile</a></li>
                 <li><a href="ProfilePicture.php" >Change Profile Picture</a></li>
                 <li><a href="ChangesPassword.php" >Change Password</a></li>
-                <li><a href="Controller/Logout.php">Logout</a></li>
+                <li><a href="../Controller/Logout.php">Logout</a></li>
             </ul> 
 			
 </td>

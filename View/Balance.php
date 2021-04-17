@@ -47,7 +47,7 @@
         $data['uid'] = $_POST['uid'];
         $data['amount'] = $_POST['amount'];
 
-        include 'Controller/Recharge.php';
+        include '../Controller/Recharge.php';
         if(Recharge($data)) {
           $message = "Recharge Successfull!";
         }else {

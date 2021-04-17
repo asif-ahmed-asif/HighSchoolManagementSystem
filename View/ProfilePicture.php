@@ -12,8 +12,37 @@
         echo "<script>location.href='Login.php'</script>";
     }
 
+    $imageErr = "";
+    $check = 1;
+
+     if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+      if ($_FILES['picture']['name']=='') {
+      $imageErr = "Picture field is empty";
+      $check = 0;
+      }elseif (isset(($_POST["submit"]))) {
+      $target_dir = "uploads/";
+      $target_file = $target_dir . basename($_FILES["picture"]["name"]);
+      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+      $icheck = getimagesize($_FILES["picture"]["tmp_name"]);
+
+      if($icheck == false) {
+      $imageErr = "File is not an image.";
+      $check = 0;
+      }elseif ($_FILES["picture"]["size"] > 400000) {
+      $imageErr = "Picture size should not be more than 4MB. ";
+      $check = 0;
+      }elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" ) {
+      $imageErr = "Picture format must be in jpeg or jpg or png. ";
+      $check = 0;
+      }
+      
+      }
+    }
+
 
     if(isset($_POST["submit"])){
+        if ($check == 1) {
         $data['uid'] = $rows['uid'];
         $data['picture'] = basename($_FILES["picture"]["name"]);
 
@@ -21,9 +50,10 @@
         $target_file = $target_dir . basename($_FILES["picture"]["name"]);
         move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file);
 
-        include 'Controller/ProfilePictureChange.php';
+        include '../Controller/ProfilePictureChange.php';
         PictureChange($data);
         header('location:ProfilePicture.php');
+        }
     }
 ?>
 
@@ -32,6 +62,9 @@
 <html>
 <head>
     <title>Profile Picture</title>
+    <style>
+    .error {color: #FF0000;}
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
@@ -47,7 +80,9 @@
             </tr>
 
             <tr>
-                <td><input name="picture" type="file" required><span class="error"></span><br></td>
+                <td><input name="picture" type="file"><span class="error"></span><br>
+                <span class="error"><?php echo $imageErr;?></span>
+                </td>
             </tr>
 
         </table>

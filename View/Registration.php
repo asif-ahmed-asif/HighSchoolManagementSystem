@@ -3,7 +3,7 @@
  $check = 1;  
 
 
- $nameErr = $emailErr = $dobErr = $genderErr = $passErr = $cpassErr = $imageErr = "";
+ $nameErr = $emailErr = $dobErr = $genderErr = $passErr = $cpassErr = $imageErr = $addressErr = "";
  $name = $email = $dd = $mm = $yyyy = $gender = $password = $cpassword = "";
 
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -92,6 +92,34 @@
         $check = 0;
       }
     }
+
+    if (empty($_POST["address"])) {
+      $addressErr = "Address field is empty";
+      $check = 0;
+    }
+
+    if ($_FILES['picture']['name']=='') {
+      $imageErr = "Picture field is empty";
+      $check = 0;
+    }elseif (isset(($_POST["submit"]))) {
+      $target_dir = "uploads/";
+      $target_file = $target_dir . basename($_FILES["picture"]["name"]);
+      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+      $icheck = getimagesize($_FILES["picture"]["tmp_name"]);
+
+      if($icheck == false) {
+      $imageErr = "File is not an image.";
+      $check = 0;
+      }elseif ($_FILES["picture"]["size"] > 400000) {
+      $imageErr = "Picture size should not be more than 4MB. ";
+      $check = 0;
+      }elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" ) {
+      $imageErr = "Picture format must be in jpeg or jpg or png. ";
+      $check = 0;
+      }
+      
+    }
+    
  }
 
  
@@ -113,7 +141,7 @@
         $target_file = $target_dir . basename($_FILES["picture"]["name"]);
         move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file);
         
-        include 'Controller/DataSave.php';
+        include '../Controller/DataSave.php';
         if(DataSave($data)) {
           $message = "Data has been saved.";
         }else {
@@ -122,7 +150,7 @@
 
       }
     } 
-include 'Controller/GetUid.php';
+include '../Controller/GetUid.php';
 $id =  GetUserId();
 ?> 
 
@@ -156,7 +184,8 @@ $id =  GetUserId();
       <input type="password" name="cpassword">
       <span class="error"><?php echo $cpassErr;?></span><hr>
       <label>Address: </label>
-      <input type="text" name="address" size="80" required><hr>
+      <input type="text" name="address" size="80">
+      <span class="error"><?php echo $addressErr;?></span><hr>
       <fieldset>
         <legend>Gender</legend>
         <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="Female">Female
@@ -174,7 +203,8 @@ $id =  GetUserId();
       </fieldset><hr>
       <fieldset>
         <legend>Profile Picture</legend>
-        <input type="file" name="picture" required>
+        <input type="file" name="picture">
+        <span class="error"><?php echo $imageErr;?></span><hr>
       </fieldset><hr><br><br>
       <input type="submit" name="submit" value="Submit">
       <input type="reset" name="reset" value="Reset">

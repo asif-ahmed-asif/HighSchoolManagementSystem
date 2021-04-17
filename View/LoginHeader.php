@@ -1,5 +1,5 @@
 <?php
-    include 'Controller/DataView.php';
+    include '../Controller/DataView.php';
     $rows = ViewData($_SESSION['userid']);
   ?>
   <!DOCTYPE html>
@@ -23,7 +23,7 @@
                     <td align="right">
 
                     Logged in as <a href="Dashboard.php"><?php echo $rows['name'] ?></a>&nbsp;|
-                        <a href="Controller/Logout.php">Logout</a>
+                        <a href="../Controller/Logout.php">Logout</a>
                     </td>
                 </tr>
             </table>

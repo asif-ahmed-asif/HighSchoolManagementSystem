@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
 
 	$userid = $_POST['uid'];
 	$pass = $_POST['password'];
-	include 'Controller/LoginValidate.php';
+	include '../Controller/LoginValidate.php';
 	$row = LoginValidation($userid, $pass);
 }
 

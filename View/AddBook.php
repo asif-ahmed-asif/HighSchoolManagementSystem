@@ -46,7 +46,7 @@
         $data['author'] = $_POST["author"];
         $data['category'] = $_POST["category"];
         $data['status'] = "a";
-        include 'Controller/BookSave.php';
+        include '../Controller/BookSave.php';
         if(BookSave($data)) {
           $message = "Book has been saved.";
         }else {
@@ -56,7 +56,7 @@
       }
     }
 
-include 'Controller/GetBid.php';
+include '../Controller/GetBid.php';
 $id =  GetBookId(); 
 
 ?> 

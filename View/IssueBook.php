@@ -53,7 +53,7 @@
         $data['ddate'] = $_POST["ddate"];
         $data['status'] = "n/a";
 
-        include 'Controller/Issue.php';
+        include '../Controller/Issue.php';
         if(BookIssue($data)) {
           $message = "Book has been issued.";
         }else {
@@ -63,7 +63,7 @@
       }
     }
 
-    include 'Controller/IssueID.php';
+    include '../Controller/IssueID.php';
     $id = GetID();
 ?>
 

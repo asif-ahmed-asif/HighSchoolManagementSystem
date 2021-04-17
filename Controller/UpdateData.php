@@ -1,16 +1,10 @@
 <?php 
-	require_once '../model.php';
-	if (isset($_POST['update'])){
-		$data['uid'] = $_POST['uid'];
-        $data['name'] = $_POST['name'];  
-        $data['email'] = $_POST["email"];
-        $data['address'] = $_POST["address"];
-        $data['gender'] = $_POST["gender"];
-        $data['dob'] = $_POST["dob"];
+	require_once '../Model/model.php';
 
-        if (DataUpdate($data)) {
-  			header('Location: ../EditProfile.php');
-  		}
-
-	}
+  function UpdateData($data)
+  {
+    DataUpdate($data);
+    return true;
+  }
+	
 ?>

@@ -13,7 +13,7 @@
 	}
 
 
-    require_once 'controller/ViewCard.php';
+    require_once '../Controller/ViewCard.php';
     $cards = ShowCards();
 ?>
 <!DOCTYPE html>

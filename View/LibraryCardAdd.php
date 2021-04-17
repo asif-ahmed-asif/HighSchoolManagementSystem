@@ -45,7 +45,7 @@
         $data['name'] = $_POST['name'];    
         $data['class'] = $_POST["class"];
     
-        include 'Controller/CardSave.php';
+        include '../Controller/CardSave.php';
         if(CardSave($data)) {
           $message = "Card has been issued.";
         }else {

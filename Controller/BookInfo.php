@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'model.php';
+require_once '../Model/model.php';
 
 function FetchAllBooks(){
 	return ShowAllBooks();

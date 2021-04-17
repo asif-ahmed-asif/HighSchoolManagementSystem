@@ -13,7 +13,7 @@
     echo "<script>location.href='Login.php'</script>";
   }
 
-  require_once 'controller/BookInfo.php';
+  require_once '../controller/BookInfo.php';
   $book = FetchBook($_GET['bid']);
 
  $message = '';  
@@ -47,7 +47,7 @@
         $data['bname'] = $_POST['bname'];    
         $data['author'] = $_POST["author"];
         $data['category'] = $_POST["category"];
-        include 'Controller/BookUpdate.php';
+        include '../Controller/BookUpdate.php';
         if(BookUpdate($data)) {
           $message = "Book has been updated.";
         }else {

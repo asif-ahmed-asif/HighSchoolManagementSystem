@@ -1,5 +1,5 @@
 <?php 
-require_once 'model.php';
+require_once '../Model/model.php';
 	function DataSave($data)
 	{
 		$login['uid'] = $data['uid'];

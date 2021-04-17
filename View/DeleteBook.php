@@ -13,7 +13,7 @@
     echo "<script>location.href='Login.php'</script>";
   }
 
-  require_once 'controller/BookInfo.php';
+  require_once '../Controller/BookInfo.php';
   $book = FetchBook($_GET['bid']);
 ?> 
 
@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-  <form action="Controller/BookDelete.php?bid=<?php echo $book['bid'] ?>" method="POST">
+  <form action="../Controller/BookDelete.php?bid=<?php echo $book['bid'] ?>" method="POST">
     <fieldset>
       <legend><b>Delete Book</b></legend><br>
       <label>Book ID: <?php echo $book['bid'];?></label><br>

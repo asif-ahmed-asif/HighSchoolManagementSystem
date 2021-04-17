@@ -25,7 +25,7 @@
 </head>
 <body>
 	<?php
-	include 'Controller/LoginDetails.php';
+	include '../Controller/LoginDetails.php';
     $row = LoginData($_SESSION['userid']);
 	$currentPass = $row['password'];
 	$newPass = $reType = $currentPass1 = $message = "";
@@ -76,7 +76,7 @@
 			$data['uid'] = $rows['uid'];
 			$data['password'] = $_POST["retype"];
 
-			include 'Controller/PasswordChange.php';
+			include '../Controller/PasswordChange.php';
 
 			if (ChangePass($data)) {
 

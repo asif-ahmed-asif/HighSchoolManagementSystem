@@ -13,7 +13,7 @@
 	}
 
 
-    require_once 'controller/BookInfo.php';
+    require_once '../Controller/BookInfo.php';
 
     if(isset($_POST['search']))
     {
