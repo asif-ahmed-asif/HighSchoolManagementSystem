@@ -29,7 +29,7 @@
       if($icheck == false) {
       $imageErr = "File is not an image.";
       $check = 0;
-      }elseif ($_FILES["picture"]["size"] > 400000) {
+      }elseif ($_FILES["picture"]["size"] > 4000000) {
       $imageErr = "Picture size should not be more than 4MB. ";
       $check = 0;
       }elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" ) {
