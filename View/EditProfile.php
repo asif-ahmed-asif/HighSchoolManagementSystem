@@ -8,8 +8,8 @@
 	}
 	else
 	{
-		echo "<script>alert(Username or Password incorrect!)</script>";
-		echo "<script>location.href='Login.php'</script>";
+    echo '<script>alert("Login First!")</script>';
+    echo '<script>location.href="Login.php"</script>';
 	}
 
 
@@ -97,11 +97,86 @@ $message = '';
 	</style>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script>
+    	
+    function ValidateEditForm(){
+      var name = document.edit.name.value;
+      var email = document.edit.email.value;
+      var address = document.edit.address.value;
+
+        
+      if (name==null || name==""){  
+        alert("Name can't be blank");  
+        return false;  
+      }else if(email==null || email==""){  
+        alert("Email can't be blank");  
+        return false;  
+      }else if(address==null || address==""){  
+        alert("Address can't be blank");  
+        return false;  
+      }
+    }
+
+    function CheckName() {
+      var name = document.edit.name.value;
+      var nameRe = /^[a-zA-Z-' ]*$/;
+      if (document.getElementById("name").value == "") {
+          document.getElementById("nameErr").innerHTML = "Name can't be blank";
+          document.getElementById("nameErr").style.color = "red";
+          document.getElementById("name").style.borderColor = "red";
+      }else if(!nameRe.test(name)){
+        document.getElementById("nameErr").innerHTML = " Only letters and white space allowed";
+        document.getElementById("nameErr").style.color = "red";
+        document.getElementById("name").style.borderColor = "red";
+
+      }else if(+CountWords(name)<+2){
+        document.getElementById("nameErr").innerHTML = " Name contains at least two words";
+        document.getElementById("nameErr").style.color = "red";
+        document.getElementById("name").style.borderColor = "red";
+      }else{
+        document.getElementById("nameErr").innerHTML = "";
+        document.getElementById("name").style.borderColor = "black";
+      }
+    }
+
+    function CountWords(str) {
+    return str.trim().split(/\s+/).length;
+    }
+
+    function CheckMail() {
+     var email = document.edit.email.value;
+     var emailRe = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/; 
+     if (document.getElementById("email").value == "") {
+          document.getElementById("emailErr").innerHTML = "Email can't be blank";
+          document.getElementById("emailErr").style.color = "red";
+          document.getElementById("email").style.borderColor = "red";
+      }else if(!emailRe.test(email)){
+        document.getElementById("emailErr").innerHTML = " Invalid email format. Format: example@something.com";
+        document.getElementById("emailErr").style.color = "red";
+        document.getElementById("email").style.borderColor = "red";
+      }else{
+        document.getElementById("emailErr").innerHTML = "";
+        document.getElementById("email").style.borderColor = "black";
+      }
+    }
+
+     function CheckAdd() {
+      if (document.getElementById("address").value == "") {
+          document.getElementById("addressErr").innerHTML = "Address can't be blank";
+          document.getElementById("addressErr").style.color = "red";
+          document.getElementById("address").style.borderColor = "red";
+      }else{
+          document.getElementById("addressErr").innerHTML = "";
+        document.getElementById("address").style.borderColor = "black";
+      }
+    }
+    </script>
 </head>
 <body>
 <fieldset>
     <legend><b>EDIT PROFILE</b></legend>
-	<form method="post" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data" name="edit" onsubmit="ValidateEditForm()">
 		<br/>
 		<table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
@@ -115,8 +190,8 @@ $message = '';
 				<td>Name</td>
 				<td>:</td>
 				<td>
-					<input name="name" type="text" value="<?php echo $rows["name"];?>">
-					<span class="error"><?php echo $nameErr;?></span>
+					<input name="name" type="text" id="name" onkeyup="CheckName()" onblur="CheckName()" value="<?php echo $rows["name"];?>">
+					<span class="error" id="nameErr"><?php echo $nameErr;?></span>
 				</td>
 				<td></td>		
 			<tr><td colspan="4"><hr/></td></tr>
@@ -124,8 +199,8 @@ $message = '';
 				<td>Email</td>
 				<td>:</td>
 				<td>
-					<input name="email" type="text" value="<?php echo $rows["email"];?>">
-					<span class="error"><?php echo $emailErr;?></span>
+					<input name="email" type="text" id="email" onkeyup="CheckMail()" onblur="CheckMail()" value="<?php echo $rows["email"];?>">
+					<span class="error" id="emailErr"><?php echo $emailErr;?></span>
 				</td>
 				<td></td>		
 			<tr><td colspan="4"><hr/></td></tr>
@@ -133,8 +208,8 @@ $message = '';
 				<td>Address</td>
 				<td>:</td>
 				<td>
-					<input name="address" type="text" size="80" value="<?php echo $rows["address"];?>">
-					<span class="error"><?php echo $addressErr;?></span>
+					<input name="address" type="text" size="80" id="address" onkeyup="CheckAdd()" onblur="CheckAdd()" value="<?php echo $rows["address"];?>">
+					<span class="error" id="addressErr"><?php echo $addressErr;?></span>
 				</td>
 				<td></td>		
 			<tr><td colspan="4"><hr/></td></tr>
@@ -142,10 +217,10 @@ $message = '';
 				<td>Gender</td>
 				<td>:</td>
 				<td>   
-					<input name="gender" type="radio" <?php if ($rows["gender"] == "Male"){ echo "checked";}?> value="Male">Male
-					<input name="gender" type="radio" <?php if ($rows["gender"] == "Female"){ echo "checked";}?> value="Female">Female
-					<input name="gender" type="radio" <?php if ($rows["gender"] == "Other"){ echo "checked";}?> value="Other">Other
-					<span class="error"><?php echo $genderErr;?></span>
+					<input name="gender" id="gender" type="radio" <?php if ($rows["gender"] == "Male"){ echo "checked";}?> value="Male">Male
+					<input name="gender" id="gender" type="radio" <?php if ($rows["gender"] == "Female"){ echo "checked";}?> value="Female">Female
+					<input name="gender" id="gender" type="radio" <?php if ($rows["gender"] == "Other"){ echo "checked";}?> value="Other">Other
+					<span class="error" id="genderErr"><?php echo $genderErr;?></span>
 				</td>
 				<td></td>
 			</tr>		
@@ -154,8 +229,8 @@ $message = '';
 				<td valign="top">Date of Birth</td>
 				<td valign="top">:</td>
 				<td>
-					<input name="dob" type="Date" value="<?php echo $rows["dob"];?>">
-					<span class="error"><?php echo $dobErr;?></span>
+					<input name="dob" type="Date" id="dob" value="<?php echo $rows["dob"];?>">
+					<span class="error" id="dobErr"><?php echo $dobErr;?></span>
 					<br/>
 				</td>
 				<td></td>

@@ -8,8 +8,8 @@
     }
     else
     {
-        echo "<script>alert(Username or Password incorrect!)</script>";
-        echo "<script>location.href='Login.php'</script>";
+    echo '<script>alert("Login First!")</script>';
+    echo '<script>location.href="Login.php"</script>';
     }
 
     $imageErr = "";

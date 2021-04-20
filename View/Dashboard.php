@@ -30,13 +30,14 @@ if (isset($_POST['submit'])) {
 	else
 	{
 		if (($row == null) || ($row['status'] != "a")) {
-			echo "<script>alert(Username or Password incorrect! or account is not activated)</script>";
-			header('location:Login.php');
+			echo '<script>alert("Username or Password incorrect! or account is not activated")</script>';
+			echo '<script>location.href="Login.php"</script>';
+			//header('location:Login.php');
 		}else{
 			$_SESSION['userid'] = $row['uid'];
 			if (isset($_POST['remember'])){
 					setcookie("userid", $row['uid'], time() + (86400 * 30)); 
-					setcookie("password", $row['password'], time() + (86400 * 30)); 
+					//setcookie("password", $row['password'], time() + (86400 * 30)); 
 			}
 	 
 			

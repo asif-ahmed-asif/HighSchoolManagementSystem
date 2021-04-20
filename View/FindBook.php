@@ -8,64 +8,56 @@
 	}
 	else
 	{
-		echo "<script>alert(Username or Password incorrect!)</script>";
-		echo "<script>location.href='Login.php'</script>";
+    echo '<script>alert("Login First!")</script>';
+    echo '<script>location.href="Login.php"</script>';
 	}
 
-
-    require_once '../Controller/BookInfo.php';
-
-    if(isset($_POST['search']))
-    {
-        $bname = $_POST['bname'];
-        $books  = FilterTable($bname);  
-    }
-    else
-    {
-        $books  = FetchAllBooks();
-    }
 ?>
-<!DOCTYPE html>
 <html>
-<head>
-	<title>Find Book</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-
-<body>
-	<form method="post" action="FindBook.php">
-      <h1>SEARCH BOOKS</h1><hr>
-      <label>Book Name:</label>
-      <input type="text" name="bname" required> &emsp;
-
-      <input type="submit" name="search" value="Search"><br><br><hr>
-
-      <table class="w3-table-all w3-hoverable">
-                <thead>
-                    <tr class="w3-blue">
-                        <th><b>Book Name<?php echo '&nbsp&nbsp&nbsp';?></th>
-                        <th>Book ID<?php echo '&nbsp&nbsp&nbsp&nbsp';?></th>
-                        <th>Author<?php echo '&nbsp&nbsp&nbsp&nbsp';?></th>
-                        <th>Category<?php echo '&nbsp&nbsp&nbsp&nbsp';?></th>
-                        <th>Status<?php echo '&nbsp&nbsp&nbsp&nbsp';?></th>
-                        <th colspan="2"></b></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($books as $i => $book): ?>
-                        <tr>
-                            <td><?php echo $book['bname'] ?></td>
-                            <td><?php echo $book['bid'] ?></td>
-                            <td><?php echo $book['author'] ?></td>
-                            <td><?php echo $book['category'] ?></td>
-                            <td><?php echo $book['status'] ?></td>
-                            <td><a href="EditBook.php?bid=<?php echo $book['bid']?>">edit<?php echo '&nbsp&nbsp&nbsp';?></a></td>
-                            <td><a href="DeleteBook.php?bid=<?php echo $book['bid'] ?>">delete<?php echo '&nbsp&nbsp&nbsp';?></a></td>
-                        </tr>
-                        <?php endforeach; ?>
-                </tbody>
-            </table>
-    </form>
-</body>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Find Books</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ </head>
+ <body>
+     <h1>SEARCH BOOKS</h1><hr>
+ 
+     <label style="font-size: 20px">Search:<?php echo '&emsp;';?></label>
+     <input type="text" name="search_text" id="search_text" placeholder="Search by Book Name"><hr>
+   <div id="result"></div>
+ </body>
 </html>
+
+
+<script>
+$(document).ready(function(){
+
+ load_data();
+
+ function load_data(query)
+ {
+  $.ajax({
+   url:"../Model/fetch.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $('#result').html(data);
+   }
+  });
+ }
+ $('#search_text').keyup(function(){
+  var search = $(this).val();
+  if(search != '')
+  {
+   load_data(search);
+  }
+  else
+  {
+   load_data();
+  }
+ });
+});
+</script>
