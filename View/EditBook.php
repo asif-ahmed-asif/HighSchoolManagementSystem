@@ -71,21 +71,64 @@
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script>
+  
+  function ValidateEditBookForm() {
+    var book = document.editbook.bname.value;
+    var author = document.editbook.author.value;
+    var category = document.getElementById("category");
+    var check = category.options[category.selectedIndex].value;
+
+    if (book==null || book==""){  
+        alert("Book Name can't be blank");  
+        return false;  
+    }else if(author==null || author==""){  
+        alert("Author name can't be blank");  
+        return false;  
+    }else if(check==0){  
+        alert("Select a book category!");  
+        return false;  
+    }
+  }
+
+  function CheckName() {
+    if (document.getElementById("bname").value == "") {
+          document.getElementById("bnameErr").innerHTML = "Book name can't be blank";
+          document.getElementById("bnameErr").style.color = "red";
+          document.getElementById("bname").style.borderColor = "red";
+      }else{
+          document.getElementById("bnameErr").innerHTML = "";
+        document.getElementById("bname").style.borderColor = "black";
+      }
+  }
+
+  function CheckAuthor() {
+    if (document.getElementById("author").value == "") {
+          document.getElementById("authorErr").innerHTML = "Author name can't be blank";
+          document.getElementById("authorErr").style.color = "red";
+          document.getElementById("author").style.borderColor = "red";
+      }else{
+          document.getElementById("authorErr").innerHTML = "";
+        document.getElementById("author").style.borderColor = "black";
+      }
+  }
+</script>
  </head>
  <body>
-  <form method="post" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data" name="editbook" onsubmit="ValidateEditBookForm()">
     <fieldset>
       <legend><b>Edit Book</b></legend>
       <label>Book Id: </label>
       <input type="text" name="bid" value="<?php echo $book['bid'];?>" readonly>
       <label>Book Name: </label>
-      <input type="text" name="bname" value="<?php echo $book['bname'];?>">
-      <span class="error"><?php echo $bnameErr;?></span><hr>
+      <input type="text" name="bname" value="<?php echo $book['bname'];?>" id="bname" onkeyup="CheckName()" onblur="CheckName()">
+      <span class="error" id="bnameErr"><?php echo $bnameErr;?></span><hr>
       <label>Author Name: </label>
-      <input type="text" name="author" value="<?php echo $book['author'];?>">
-      <span class="error"><?php echo $authorErr;?></span><hr>
+      <input type="text" name="author" value="<?php echo $book['author'];?>" id="author" onkeyup="CheckAuthor()" onblur="CheckAuthor()">
+      <span class="error" id="authorErr"><?php echo $authorErr;?></span><hr>
       <label>Category: </label>
-      <select name = "category">
+      <select name = "category" id="category">
         <option ></option>  
         <option value="History" <?php if ($book["category"] == "History"){ echo "selected";}?>>History</option>
         <option value="Science" <?php if ($book["category"] == "Science"){ echo "selected";}?>>Science</option>  

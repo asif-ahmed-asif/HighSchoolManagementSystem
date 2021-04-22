@@ -76,25 +76,71 @@
      <style>
 		.error {color: #FF0000;}
 	</style>
+
+  <script>
+    
+    function ValidateIssueForm() {
+      var bid = document.issuebook.bid.value;
+      var uid = document.issuebook.uid.value;
+      var idate = document.issuebook.idate.value;
+      var ddate = document.issuebook.ddate.value;
+
+      if (bid==null || bid==""){  
+        alert("Book ID can't be blank");  
+        return false;  
+      }else if(uid==null || uid==""){  
+          alert("User ID can't be blank");  
+          return false;  
+      }else if(idate==null || idate==""){  
+          alert("Issue date can't be blank");  
+          return false;  
+      }else if(ddate==null || ddate==""){  
+          alert("Due date can't be blank");  
+          return false;  
+      }
+    }
+
+    function CheckBID() {
+      if (document.getElementById("bid").value == "") {
+          document.getElementById("bidErr").innerHTML = "Book ID can't be blank";
+          document.getElementById("bidErr").style.color = "red";
+          document.getElementById("bid").style.borderColor = "red";
+      }else{
+        document.getElementById("bidErr").innerHTML = "";
+        document.getElementById("bid").style.borderColor = "black";
+      }
+    }
+
+    function CheckUID() {
+      if (document.getElementById("uid").value == "") {
+          document.getElementById("uidErr").innerHTML = "User ID can't be blank";
+          document.getElementById("uidErr").style.color = "red";
+          document.getElementById("uid").style.borderColor = "red";
+      }else{
+        document.getElementById("uidErr").innerHTML = "";
+        document.getElementById("uid").style.borderColor = "black";
+      }
+    }
+  </script>
 </head>
 <body>
-	<form method="post" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data" name="issuebook" onsubmit="ValidateIssueForm()">
 		<fieldset>
 			<legend><b>ISSUE BOOKS</b></legend>
           <label>Issue Id: </label>
           <input type="text" name="id" value="<?php echo $id;?>" readonly><hr>
 			    <label>Book ID:</label>
-      		<input type="text" name="bid">
-      		<span class="error"><?php echo $bidErr;?></span><hr>
+      		<input type="text" name="bid" id="bid" onkeyup="CheckBID()" onblur="CheckBID()">
+      		<span class="error" id="bidErr"><?php echo $bidErr;?></span><hr>
       		<label>User ID:</label>
-      		<input type="text" name="uid">
-      		<span class="error"><?php echo $uidErr;?></span><hr>
+      		<input type="text" name="uid" id="uid" onkeyup="CheckUID()" onblur="CheckUID()">
+      		<span class="error" id="uidErr"><?php echo $uidErr;?></span><hr>
       		<label>Issue Date:</label>
-      		<input type="Date" name="idate">
-      		<span class="error"><?php echo $idateErr;?></span><hr>
+      		<input type="Date" name="idate" id="idate">
+      		<span class="error" id="idateErr"><?php echo $idateErr;?></span><hr>
       		<label>Due Date:</label>
-      		<input type="Date" name="ddate">
-      		<span class="error"><?php echo $ddateErr;?></span><hr><br>
+      		<input type="Date" name="ddate" id="ddate">
+      		<span class="error" id="ddateErr"><?php echo $ddateErr;?></span><hr><br>
       		<input type="submit" name="submit" value="Submit">
       		<input type="reset" name="reset" value="Reset">
 

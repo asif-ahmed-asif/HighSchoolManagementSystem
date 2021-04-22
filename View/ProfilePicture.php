@@ -67,11 +67,21 @@
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script>
+      
+      function ValidatePicForm() {
+        var picture = document.getElementById("picture");
+        if(picture.files.length == 0){  
+        alert("Picture field can't be blank");  
+        return false;  
+      }
+      }
+    </script>
 </head>
 <body>
 <fieldset>
     <legend><b>PROFILE PICTURE</b></legend>
-    <form method="post"  enctype="multipart/form-data">
+    <form method="post" name="picform"  enctype="multipart/form-data" onsubmit="ValidatePicForm()">
 
         <table>
 
@@ -80,7 +90,7 @@
             </tr>
 
             <tr>
-                <td><input name="picture" type="file"><span class="error"></span><br>
+                <td><input name="picture" id="picture" type="file"><span class="error"></span><br>
                 <span class="error"><?php echo $imageErr;?></span>
                 </td>
             </tr>

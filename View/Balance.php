@@ -67,17 +67,60 @@
      <style>
 		.error {color: #FF0000;}
 	</style>
+
+    <script>
+    
+    function ValidateBalanceForm() {
+      var uid = document.balance.uid.value;
+      var amount = document.balance.amount.value;
+
+      if(uid==null || uid==""){  
+          alert("User ID can't be blank");  
+          return false;  
+      }else if(amount==null || amount==""){  
+          alert("Amount can't be blank");  
+          return false;  
+      }
+    }
+
+    function CheckUID() {
+      if (document.getElementById("uid").value == "") {
+          document.getElementById("uidErr").innerHTML = "User ID can't be blank";
+          document.getElementById("uidErr").style.color = "red";
+          document.getElementById("uid").style.borderColor = "red";
+      }else{
+        document.getElementById("uidErr").innerHTML = "";
+        document.getElementById("uid").style.borderColor = "black";
+      }
+    }
+
+      function CheckAm() {
+       var amount = document.balance.amount.value; 
+      if (document.getElementById("amount").value == "") {
+          document.getElementById("amountErr").innerHTML = " Amount can't be blank";
+          document.getElementById("amountErr").style.color = "red";
+          document.getElementById("amount").style.borderColor = "red";
+      }else if(amount<1){
+        document.getElementById("amountErr").innerHTML = " Amount must be greater than zero ";
+        document.getElementById("amountErr").style.color = "red";
+        document.getElementById("amount").style.borderColor = "red";
+      }else{
+        document.getElementById("amountErr").innerHTML = "";
+        document.getElementById("amount").style.borderColor = "black";
+      }
+    }
+  </script>
 </head>
 <body>
-	<form method="post" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data" name="balance" onsubmit="ValidateBalanceForm()">
 		<fieldset>
 			<legend><b>Balance Recharge</b></legend>
       		<label>User ID:</label>
-      		<input type="text" name="uid">
-      		<span class="error"><?php echo $uidErr;?></span><hr>
+      		<input type="text" name="uid" id="uid" onkeyup="CheckUID()" onblur="CheckUID()">
+      		<span class="error" id="uidErr"><?php echo $uidErr;?></span><hr>
       		<label>Amount:</label>
-      		<input type="text" name="amount">
-      		<span class="error"><?php echo $amountErr;?></span><hr><br>
+      		<input type="text" name="amount" id="amount" onkeyup="CheckAm()" onblur="CheckAm()">
+      		<span class="error" id="amountErr"><?php echo $amountErr;?></span><hr><br>
       		<input type="submit" name="submit" value="Submit">
       		<input type="reset" name="reset" value="Reset">
 
