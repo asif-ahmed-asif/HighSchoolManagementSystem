@@ -12,6 +12,35 @@
 			color: red;
 		}
 	</style>
+
+  <script>
+    
+    function ValidateForgetForm() {
+      var email = document.forgetpass.email.value;
+
+      if(email==null || email==""){  
+        alert("Email can't be blank");  
+        return false;  
+      }
+    }
+
+    function CheckMail() {
+     var email = document.forgetpass.email.value;
+     var emailRe = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/; 
+     if (document.getElementById("email").value == "") {
+          document.getElementById("emailErr").innerHTML = "Email can't be blank";
+          document.getElementById("emailErr").style.color = "red";
+          document.getElementById("email").style.borderColor = "red";
+      }else if(!emailRe.test(email)){
+        document.getElementById("emailErr").innerHTML = " Invalid email format. Format: example@something.com";
+        document.getElementById("emailErr").style.color = "red";
+        document.getElementById("email").style.borderColor = "red";
+      }else{
+        document.getElementById("emailErr").innerHTML = "";
+        document.getElementById("email").style.borderColor = "black";
+      }
+    }
+  </script>
 <body>
 
 <?php
@@ -37,12 +66,12 @@
     } 
 ?>
 <?php include('Header.php');?>
-<form method="post" action="">
+<form method="post" action="" name="forgetpass" onsubmit="ValidateForgetForm()">
 <fieldset style="margin-left: 35px">
     <legend><b>FORGOT PASSWORD</b></legend>
       <label>Email: </label>
-      <input type="text" name="email">
-      <span class="error"><?php echo $emailErr;?></span><hr>
+      <input type="text" name="email" id="email" onkeyup="CheckMail()" onblur="CheckMail()" size="40">
+      <span class="error" id="emailErr"><?php echo $emailErr;?></span><hr>
       <input type="submit" name="submit" value="Submit" >
 </fieldset>
 </form>
