@@ -356,7 +356,7 @@ $id =  GetUserId();
   </script>
  </head>
  <body>
-  <?php include('Header.php');?>
+  <?php include('RHeader.php');?>
   <form method="post" name="reg" action="" enctype="multipart/form-data" onsubmit="ValidateRegForm()">
     <fieldset style="margin-left: 35px">
       <legend><b>REGISTRATION</b></legend>

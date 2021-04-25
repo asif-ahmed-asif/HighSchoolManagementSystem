@@ -13,20 +13,29 @@
 </head>
 <body>
 
-<header>
-	<table>
+	<table width="80%" align="center" cellspacing="0" cellpadding="10" border="1">
 		<tr>
-			<th><a href="PublicHome.php"><img src="image/icon.png" alt="logo" style="width:100px;height:100px;"></a></th>
-			<th width="85%"></th>
-			<th width="3%"><a href="PublicHome.php">Home</a> </th>
-			<th>|</th>
-			<th width="3%"><a href="Login.php">Login</a> </th>
-			<th>|</th>
-			<th width="5%"><a href="Registration.php">Registration</a></th>
-		</tr>
+        <td valign="middle" height="70">
+			<table width="100%">
+				<tr>					
+					<td>
+						<a href="../../Home/Index.php">
+							<img height="55" src="image/icon.png" />
+						</a>
+					</td>
+					<td align="right">
+                        <a href="PublicHome.php" >Home</a>&nbsp;|
+                        <a href="Login.php" >Login</a>&nbsp;|
+						<a href="Registration.php">Registration</a></th>
+					</td>
+		        </tr>
 	</table>
+        </td>
 	<hr>
-</header>
+	</tr>
+    <tr>
+        <td align="center">
+
 
 </body>
 </html>
