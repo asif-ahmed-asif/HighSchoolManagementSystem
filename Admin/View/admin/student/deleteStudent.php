@@ -12,6 +12,8 @@ $student = fetchStudent($_GET['id']);
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../../CSS/button.css" crossorigin="anonymous">
 	<title>Delete Student</title>
 	<style>
 	.text
@@ -107,8 +109,8 @@ $student = fetchStudent($_GET['id']);
     </table>
     <hr/>
 
-	    <center><input type="submit" value="Delete"name="deleteStudent" id="deleteStudent">
-	    <button type="submit" formaction="searchStudent.php">Back</button>
+	    <center><input type="submit" class="button" value="Delete"name="deleteStudent" id="deleteStudent">
+	    <button type="submit" class="button3" formaction="searchStudent.php">Back</button>
 
 	</form>
 	</fieldset>

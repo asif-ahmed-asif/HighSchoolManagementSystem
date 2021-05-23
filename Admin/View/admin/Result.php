@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../CSS/button.css" crossorigin="anonymous">
   <title>Student Results</title>
 </head>
 <style>
@@ -90,7 +92,7 @@ $totlcount = 0;
   <form action="#" method="POST">
 
   <center><input class="text" type="text" name="valueToSearch" placeholder="Value To Search" value=<?php echo $valueToSearch ?>>
-  <input type="submit" name="search" value="Search" onClick="return submit1();"><br><br><center><div id="errorBox" style="font-size:18px;"></div>
+  <input type="submit" name="search" class="button3" value="Search" onClick="return submit1();"><br><br><center><div id="errorBox" style="font-size:18px;"></div>
   <span class="error" style="font-size:20px;"><?php echo "&nbsp&nbsp"?><?php echo $error;?> </span><br>
 
   <table border=1 width=100%>

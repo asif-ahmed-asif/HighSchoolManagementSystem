@@ -7,6 +7,8 @@
 <head>
   <title>Assign Teacher</title>
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../CSS/button.css" crossorigin="anonymous">
     <style>
       label
       {
@@ -30,6 +32,7 @@
     {
       color:#F00;
     }
+
   </style>
 
   <script type="text/javascript">
@@ -249,9 +252,9 @@ $error ="";
     <hr/>
   </form>
   
-  <center><input type="submit" name="submit" value="Assign" onClick="return submit1();" style="width: 60px">
-  <button type="submit" formaction="Logged_In_Dashboard.php">Back</button>
-  <button type="submit" formaction="ViewTeachers.php">Assigned Teacher</button>
+  <center><input type="submit" class="button3" name="submit" value="Assign" onClick="return submit1();" style="width: 60px">
+  <button type="submit" class="button3" formaction="Logged_In_Dashboard.php">Back</button>
+  <button type="submit" class="button3" formaction="ViewTeachers.php">Assigned Teacher</button>
   <br/><br>
   </form>
 </fieldset>

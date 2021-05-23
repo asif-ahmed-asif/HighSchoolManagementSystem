@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../CSS/button.css" crossorigin="anonymous">
   <title>Change Profile Picture</title>
 </head>
 <style >
@@ -54,7 +56,8 @@
 $img = mysqli_query($conn, "SELECT * FROM admin where uid='".$_SESSION["uid"]."'");
     while ($row = mysqli_fetch_array($img)) 
     {
-        $id = "<img src='../image/".$row['picture']."' >";
+        $id = "<img src='../image/".$row['picture']."' height='150' width='150'>";
+        //echo '<img src='../image/".$row['picture']."' height="130" width="150">';
         //echo $id;
     }
 ?>
@@ -117,7 +120,14 @@ $img = mysqli_query($conn, "SELECT * FROM admin where uid='".$_SESSION["uid"]."'
 
         <table>
             <tr>
-                <td><img src="../image/Fahim.png" width="150" height="150"><br></td>
+                <?php
+                    $img = mysqli_query($conn, "SELECT * FROM admin where uid='".$_SESSION["uid"]."'");
+                    while ($row = mysqli_fetch_array($img)) 
+                    {
+                        $id = "<img src='../image/".$row['picture']."' height='150' width='150'>";
+                        echo $id;
+                    }
+                ?>
             </tr>
 
             <tr>
@@ -126,8 +136,8 @@ $img = mysqli_query($conn, "SELECT * FROM admin where uid='".$_SESSION["uid"]."'
 
         </table>
         <hr/>
-        <center><input type="submit" name="submit" value="Submit" onClick="return submit1();" style="width: 60px">
-        <button type="submit" formaction="Logged_In_Dashboard.php">Back</button>
+        <center><input type="submit" class="button3" name="submit" value="Submit" onClick="return submit1();" style="width: 60px">
+        <button type="submit" class="button3" formaction="Logged_In_Dashboard.php">Back</button>
     </form>
 </fieldset>
 </form>

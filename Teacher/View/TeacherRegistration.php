@@ -195,13 +195,13 @@
       }
       else if(myDate > Date.now())
       {
-        document.Teacher_Reg.dob.focus();
+        document.Reg_Form.dob.focus();
         document.getElementById("errdob").innerHTML = "Future date cannot be selected";
         return false;
       }
       else if(today.getFullYear() - myDate.getFullYear() < 18)
       {
-        document.Student_Reg.dob.focus();
+        document.Reg_Form.dob.focus();
         document.getElementById("errdob").innerHTML = "Eligibility 18 years ONLY.";
         return false;
       }

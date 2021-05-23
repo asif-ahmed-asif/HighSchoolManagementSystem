@@ -29,6 +29,10 @@
   color: white;
   table-layout: fixed;
 }
+.error
+{
+  color: RED;
+}
 </style>
 
 
@@ -41,6 +45,7 @@
   </tr>
 
 <?php
+$echo = "";
 $q = $_GET['q'];
 
 $con = mysqli_connect('localhost','root','','school');
@@ -49,10 +54,10 @@ if (!$con)
   die('Could not connect: ' . mysqli_error($con));
 }
 
-mysqli_select_db($con,"ajax_demo");
+mysqli_select_db($con,"teacher");
 $sql="SELECT distinct u.name, e.uid, e.subject FROM allsubjects AS e INNER JOIN teacher AS u ON e.uid = u.uid WHERE subject = '".$q."'";
-$result = mysqli_query($con,$sql);
 
+/*$result = mysqli_query($con,$sql);
 while($row = mysqli_fetch_array($result))
 {
   echo "<tr>";
@@ -60,10 +65,31 @@ while($row = mysqli_fetch_array($result))
   echo "<td>" . $row['name'] . "</td>";
   echo "<td>" . $row['subject'] . "</td>";
   echo "</tr>";
+}*/
+
+if ($result=mysqli_query($con,$sql))
+{
+  $rowcount=mysqli_num_rows($result);
+
+  if($rowcount > 0)
+  {
+    while($row = mysqli_fetch_array($result))
+    {
+      echo "<tr>";
+      echo "<td>" . $row['uid'] . "</td>";
+      echo "<td>" . $row['name'] . "</td>";
+      echo "<td>" . $row['subject'] . "</td>";
+      echo "</tr>";
+    }
+  }
+  else
+    $echo = "No Teacher Assigned yet in this Subject!!";
+
+    mysqli_free_result($result);
 }
 
 mysqli_close($con);
 ?>
-
+<span class="error" style="font-size:20px;"><?php echo "&nbsp&nbsp"?><?php echo $echo;?> </span><br>
 </body>
 </html>

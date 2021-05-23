@@ -13,6 +13,8 @@ $teacher = fetchTeacher($_GET['id']);
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../../CSS/button.css" crossorigin="anonymous">
 	<title>Edit Teacher</title>
     <style>
     .text
@@ -352,9 +354,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <td valign="top">Date of Birth</td>
         <td valign="top">:</td>
         <td>
-          <input name="dob" type="text" value="<?php echo $teacher['dob']?>">
+          <input name="dob" type="date" value="<?php echo $teacher['dob']?>">
           <br/>
-          <font size="2"><i>(yyyy/mm/dd)</i></font>
+          <font size="2"><i>(mm/dd/yyyy)</i></font>
         </td>
         <td></td>
       </tr>
@@ -371,8 +373,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     <hr/>
 
     <input type="hidden" uid="uid" name="uid" value="<?php echo $teacher['uid']?>"><br>
-    <center><input type="submit" name = "updateTeacher" onClick="return validateForm();" value="Update">
-    <button type="submit" formaction="searchTeacher.php">Back</button>
+    <center><input type="submit" class="button3" name = "updateTeacher" onClick="return validateForm();" value="Update">
+    <button type="submit" class="button3" formaction="searchTeacher.php">Back</button>
     
   </fieldset>
 </form> 

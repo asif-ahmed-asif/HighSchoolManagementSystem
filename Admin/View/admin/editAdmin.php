@@ -13,6 +13,8 @@ $admin = fetchAdmin($_GET['id']);
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../CSS/button.css" crossorigin="anonymous">
 	<title>Edit Admin</title>
     <style>
     .text
@@ -281,8 +283,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     <hr/>
 
     <input type="hidden" uid="uid" name="uid" value="<?php echo $admin['uid']?>"><br>
-    <center><input type="submit" name = "updateAdmin" onClick="return validateForm();" value="Update">
-    <button type="submit" formaction="searchAdmin.php">Back</button>
+    <center><input type="submit" class="button3" name = "updateAdmin" onClick="return validateForm();" value="Update">
+    <button type="submit" class="button3" formaction="searchAdmin.php">Back</button>
   </fieldset>
 </form> 
 

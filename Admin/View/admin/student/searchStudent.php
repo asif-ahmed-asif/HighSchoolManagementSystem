@@ -21,6 +21,8 @@ else
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../../CSS/button.css" crossorigin="anonymous">
         <title>Search Student</title>
         <style>
             table, th, td ,tr 
@@ -41,7 +43,7 @@ else
         <fieldset style="width: 96%;">
             <legend class="text"><b>SEARCH STUDENT</b></legend>
             <center><input class="text" type="text" name="valueToSearch" placeholder="Value To Search" value=<?php echo $valueToSearch ?>>
-            <input type="submit" name="search" value="Search by Name"><br><br>
+            <input type="submit" class="button3" name="search" value="Search by Name"><br><br>
             
             <table>
                 <thead>
@@ -69,9 +71,9 @@ else
                             <td><?php echo $student['dob'] ?></td>
                             <td><?php echo $student['class'] ?></td>
                             
-                            <td><a href="editStudent.php?id=<?php echo $student['uid']?>">Edit<?php echo '&nbsp&nbsp&nbsp&nbsp&nbsp';?></a></td>
+                            <td><a href="editStudent.php?id=<?php echo $student['uid']?>" style="color:#008000;">Edit<?php echo '&nbsp&nbsp&nbsp&nbsp&nbsp';?></a></td>
 
-                            <td><a href="deleteStudent.php?id=<?php echo $student['uid'] ?>">Delete<?php echo '&nbsp&nbsp&nbsp&nbsp&nbsp';?></a></td>
+                            <td><a href="deleteStudent.php?id=<?php echo $student['uid'] ?>" style="color:red;">Delete<?php echo '&nbsp&nbsp&nbsp&nbsp&nbsp';?></a></td>
                             
                         </tr>
                         <?php endforeach; ?>
@@ -79,7 +81,7 @@ else
 
             </table>
             <br>
-            <button type="submit" formaction="../Logged_In_Dashboard.php">Back</button>
+            <button type="submit" class="button3" formaction="../Logged_In_Dashboard.php">Back</button>
         </fieldset>
         </form>
     </body>

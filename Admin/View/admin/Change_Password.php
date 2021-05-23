@@ -7,6 +7,8 @@
     <title>Change Password</title>
     
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../CSS/button.css" crossorigin="anonymous">
 <style >
     label
         {
@@ -179,8 +181,8 @@
     <input type="text" name="rnpass" value="<?php echo $rnpass;?>" ><span class="error"><?php echo "&nbsp&nbsp"?><?php echo $ernpass;?> </span><br><div id="errorBox"></div>
     <hr>
 
-    <center><input type="submit" name="submit" value="Submit" onClick="return validateForm();" style="width: 60px">
-    <button type="submit" formaction="Logged_In_Dashboard.php">Back</button>
+    <center><input type="submit" class="button3" name="submit" value="Submit" onClick="return validateForm();" style="width: 60px">
+    <button type="submit" class="button3" formaction="Logged_In_Dashboard.php">Back</button>
         
     </form>
 </fieldset>

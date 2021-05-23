@@ -7,6 +7,16 @@
 <html>
 <head>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <style>
+ 
+         .errorBox
+         {
+         color:#F00;
+         }
+      }
+
+
+  </style>
  
   <title>Upload Marks</title>
    
@@ -33,7 +43,7 @@
           </select>
         </td>
         
-        <td><div id="classErr"><?php echo $class; ?></div></td>
+        <td><div class="errorBox" id="classErr"><?php echo $eclass; ?></div></td>
         <td></td>
          <td></td>
         
@@ -46,7 +56,7 @@
         <div id="subject"></div> 
         </td>
         <!-- <td></td> -->
-        <td><div id="subjectErr"><?php echo $subject; ?></div></td>
+        <td><div class="errorBox" id="subjectErr"><?php echo $esubject; ?></div></td>
          <td></td>
           <td></td>
       </tr>   
@@ -58,7 +68,7 @@
         <div id="sid"></div>
         </td>
         <!-- <td></td> -->
-        <td><div id="sidErr"><?php echo $sid; ?></div></td>
+        <td><div class="errorBox" id="sidErr"><?php echo $esid; ?></div></td>
          <td></td>
           <td></td>
       </tr>   
@@ -155,6 +165,7 @@
 function showsubjectcombo(i){
     resetVal();
     var clas = document.getElementById('class').value;
+    document.getElementById("classErr").innerHTML = "";
   
     
     var xhttp = new XMLHttpRequest();

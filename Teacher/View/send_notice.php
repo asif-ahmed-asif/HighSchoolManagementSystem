@@ -16,8 +16,8 @@
         display: inline-block;
         width: 20%;
         padding: 1%; 
- }
-         #errorBox
+     }
+         .errorBox
          {
          color:#F00;
          }
@@ -42,7 +42,7 @@
 
 <fieldset>
     <legend><b>Send Notice</b></legend>
-  <form action=""  method="POST" name="Send_Notice" onsubmit="return noticeVal();"  >
+  <form action=""  method="POST" name="Send_Notice" onsubmit=" return noticeVal();"  >
     <br/>
     <table width="100%" cellpadding="0" cellspacing="0">
       <tr>
@@ -59,9 +59,9 @@
           </select>
         </td>
         <td></td>
-        <td><div id="classErr"><?php echo $class; ?></div></td>
+        <td><div class="errorBox" id="classErr"><?php echo $eclass; ?></div></td>
       </tr>   
-      <tr><td colspan="4"><hr/></td></tr>
+      <tr><td colspan="5"><hr/></td></tr>
       
         <tr>
         <td>Subjects</td>
@@ -70,29 +70,31 @@
           <div id="subject"></div> 
         </td>
         <td></td>
-          <td></td><div id="subjectErr"><?php echo $subject; ?></div>
+          <td><div class="errorBox" id="subjectErr"><?php echo $esubject; ?></div></td>
         <td></td>
       </tr>   
         
-      <tr><td colspan="4"><hr/></td></tr>
+      <tr><td colspan="5"><hr/></td></tr>
       <tr>
         <td>Title</td>
         <td>:</td>
         <td><input name="title" type="text " id="title" onkeyup="checkTitle()" onblur="checkTitle()"></td>
-        <td></td><div id="titleErr"><?php echo $title; ?></div>
         <td></td>
+        <td><div class="errorBox" id="titleErr"><?php echo $etitle; ?></div></td>
+        
       </tr>   
-      <tr><td colspan="4"><hr/></td></tr>
+      <tr><td colspan="5"><hr/></td></tr>
       <tr>
         <td>Notice</td>
         <td>:</td>
         <td> <textarea name="notice"  rows="5" id="notice" onkeyup="checkNotice()" onblur="checkNotice()"></textarea></td>
-        <td></td><div id="noticeErr"><?php echo $notice; ?></div>
         <td></td>
+        <td><div class="errorBox" id="noticeErr"><?php echo $enmessage; ?></div></td>
+        
       </tr>   
-      <tr><td colspan="4"><hr/></td></tr>
+      <tr><td colspan="5"><hr/></td></tr>
     </table>
-    <hr/>
+    
     <input type="submit" name="submit" value="Submit">
     <input type="reset">
   </form>
@@ -102,6 +104,7 @@
 <script >
   function showsubjectcombo(x){
     var data=$(x).val();
+     document.getElementById("classErr").innerHTML = "";
     
     $.ajax({
 
@@ -137,8 +140,8 @@
        
        if (clss==null || clss==""){  
         // alert("Class can't be blank"); 
-        document.getElementById("titleErr").innerHTML = "Class Must be selected"; 
-        document.getElementById("titleErr").style.color = "red";
+        document.getElementById("classErr").innerHTML = "Class Must be selected"; 
+        document.getElementById("classErr").style.color = "red";
         return false;  
       }
 

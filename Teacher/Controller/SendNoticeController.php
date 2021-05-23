@@ -1,7 +1,7 @@
 <?php
 
 $class = $subject = $title = $notice= $nsubject = $message = "";
-$eclass = $esubject = $ensubject = $enmessage = "";
+$eclass = $esubject = $etitle = $enmessage = "";
 $error = $message = "";
 $errorFlag=0;
 
@@ -22,12 +22,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
       if(empty($_POST["title"]))  
       {  
-           $ensubject = "Enter notice title"; 
+           $etitle = "Enter notice title"; 
            $errorFlag=1; 
       }
         if(strlen($_POST["title"])<3)  
       {  
-           $ensubject = "Title must be at least 3 character";  
+           $etitle = "Title must be at least 3 character";  
            $errorFlag=1;
       }
     

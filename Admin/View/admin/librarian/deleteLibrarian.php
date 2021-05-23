@@ -12,6 +12,8 @@ $librarian = fetchLibrarian($_GET['id']);
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../../CSS/button.css" crossorigin="anonymous">
 	<title>Delete Lbrarian</title>
 	<style>
 	.text
@@ -82,8 +84,8 @@ $librarian = fetchLibrarian($_GET['id']);
     </table>
     <hr/>
 
-	    <center><input type="submit" value="Delete"name="deleteLibrarian" id="deleteLibrarian">
-	    <button type="submit" formaction="searchLibrarian.php">Back</button>
+	    <center><input type="submit" class="button" value="Delete"name="deleteLibrarian" id="deleteLibrarian">
+	    <button type="submit" class="button3" formaction="searchLibrarian.php">Back</button>
 
 		</form>
 	</fieldset>

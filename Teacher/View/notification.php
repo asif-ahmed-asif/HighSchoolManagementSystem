@@ -12,10 +12,12 @@
 	
 	if(mysqli_num_rows($result)>0){?>
 	
-		<ul>
+		<ol>
 		<?php while($row=mysqli_fetch_assoc($result)){?>
 			<li><input type="button" value="<?php echo $row['title'];?>" onclick="shownotice('<?php echo $row['notice'];?>')" /></li>
-	<?php } ?> </ul>
+			<br>
+	<?php } ?> 
+		</ol>
 	
 	<?php
 	}else

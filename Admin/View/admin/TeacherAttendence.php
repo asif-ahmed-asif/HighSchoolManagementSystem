@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../CSS/button.css" crossorigin="anonymous">
   <title>Attendence</title>
     <style>
       label
@@ -137,9 +139,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
   <span class="error"><?php echo "&nbsp&nbsp"?><?php echo $ertype;?>
   <hr>
 
-  <center><input type="submit" name="submit" value="Save" onClick="return submit1();" style="width: 60px">
-  <button type="submit" formaction="Data.php">Attendence</button>
-  <button type="submit" formaction="Logged_In_Dashboard.php">Back</button>
+  <center><input type="submit" class="button3" name="submit" value="Save" onClick="return submit1();" style="width: 60px">
+  <button type="submit" class="button3" formaction="Data.php">Attendence</button>
+  <button type="submit" class="button3" formaction="Logged_In_Dashboard.php">Back</button>
 
   </form>
 </fieldset>

@@ -12,6 +12,8 @@ $student = fetchStudent($_GET['id']);
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../../CSS/button.css" crossorigin="anonymous">
 	<title>Edit Student</title>
     <style>
     .text
@@ -355,9 +357,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <td valign="top">Date of Birth</td>
         <td valign="top">:</td>
         <td>
-          <input name="dob" type="text" value="<?php echo $student['dob']?>">
+          <input name="dob" type="date" value="<?php echo $student['dob']?>">
           <br/>
-          <font size="2"><i>(yyyy/mm/dd)</i></font>
+          <font size="2"><i>(mm/dd/yyyy)</i></font>
         </td>
         <td></td>
         
@@ -386,8 +388,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     <hr/>
 
     <input type="hidden" uid="uid" name="uid" value="<?php echo $student['uid']?>"><br>
-    <center><input type="submit" name = "updateStudent" onClick="return validateForm();" value="Update">
-    <button type="submit" formaction="searchStudent.php">Back</button>
+    <center><input type="submit" class="button3" name = "updateStudent" onClick="return validateForm();" value="Update">
+    <button type="submit" class="button3" formaction="searchStudent.php">Back</button>
     
   </fieldset>
 </form> 

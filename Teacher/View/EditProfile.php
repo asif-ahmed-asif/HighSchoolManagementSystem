@@ -220,7 +220,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                    
         </td>
 
-        <td colspan="2"></td>
+        <td colspan="2">
+           <span class="error" id="errimg"><?php echo $eimg;?></span>
+        </td>
           
       
 </tr>
@@ -278,10 +280,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					<input name="gender" type="radio" value="Male" <?php if($data["gender"]=='Male') echo "checked"; ?>> Male
 					<input name="gender" type="radio" value="Female"<?php if($data["gender"]=='Female') echo "checked"; ?>>Female
 					<input name="gender" type="radio" value="Other" <?php if($data["gender"]=='Other') echo "checked"; ?>>Other
-          <span class="error" id="gender"><?php echo $egender;?></span>
+          
 				</td>
 				
-				<td></td>
+				<td><span class="error" id="errgender"><?php echo $egender;?></span></td>
 			</tr>		
 			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
@@ -477,8 +479,8 @@ function checkMname(){
       document.getElementById("errmname").innerHTML="";
       document.getElementById("erremail").innerHTML="";
       document.getElementById("erraddress").innerHTML="";
-      document.getElementById("errimg").innerHTML="";
-      document.getElementById("errgender").innerHTML="";
+      // document.getElementById("errimg").innerHTML="";
+      // document.getElementById("errgender").innerHTML="";
       document.getElementById("errdob").innerHTML="";
      
       var nameRegex = /^[a-zA-Z-' ]*$/;
@@ -577,19 +579,7 @@ function checkMname(){
         document.getElementById("erremail").innerHTML = "Invalid email format. Format: example@something.com";
         return false;
       }
-      //Address
-      if(address == "")
-      {
-        document.Reg_Form.address.focus();
-        document.getElementById("erraddress").innerHTML = "Address is required!!";
-        return false;
-      }
-      else if(!addressRegex.test(address))
-      {
-        document.Reg_Form.address.focus();
-        document.getElementById("erraddress").innerHTML = "Letter Only";
-        return false;
-      }
+      
       //Password
 
      // var pass =  document.getElementById("pass").value;

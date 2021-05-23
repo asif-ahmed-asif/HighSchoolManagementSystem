@@ -7,6 +7,8 @@
 <head>
   <title>Add New Subject</title>
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../CSS/button.css" crossorigin="anonymous">
     <style>
       label
       {
@@ -182,8 +184,8 @@ $error = "";
     <hr/>
   </form>
   
-  <center><input type="submit" name="submit" value="Add" onClick="return validateForm();" style="width: 60px">
-  <button type="submit" formaction="Logged_In_Dashboard.php">Back</button>
+  <center><input type="submit" class="button3" name="submit" value="Add" class="button1" onClick="return validateForm();" style="width: 60px">
+  <button type="submit" class="button3" formaction="Logged_In_Dashboard.php">Back</button>
   <br/><br>
   </form>
 </fieldset>

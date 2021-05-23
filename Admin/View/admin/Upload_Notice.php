@@ -6,6 +6,8 @@
 <head>
   <title>Upload Notice</title>
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../CSS/button.css" crossorigin="anonymous">
     <style>
       label
       {
@@ -157,8 +159,8 @@ if(isset($_POST['submit']))
     <hr/>
   </form>
   
-  <center><input type="submit" name="submit" value="Upload" onClick="return validateForm();" style="width: 60px">
-  <button type="submit" formaction="Logged_In_Dashboard.php">Back</button>
+  <center><input type="submit" class="button3" name="submit" value="Upload" onClick="return validateForm();" style="width: 60px">
+  <button type="submit" class="button3" formaction="Logged_In_Dashboard.php">Back</button>
   <br/><br>
   </form>
 </fieldset>

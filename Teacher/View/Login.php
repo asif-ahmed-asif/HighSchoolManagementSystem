@@ -1,6 +1,9 @@
 
 <?php 
 session_start();
+if(isset($_SESSION['uid'])){
+    header("location: Dashboard.php");
+}
 $eruid=$erpass= "";
  include( '../Model/model.php');
 
